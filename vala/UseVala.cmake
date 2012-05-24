@@ -122,10 +122,10 @@ function(vala_precompile output)
     set(in_files "")
     set(out_files "")
     foreach(src ${ARGS_SOURCES} ${ARGS_UNPARSED_ARGUMENTS})
-        list(APPEND in_files "${CMAKE_CURRENT_SOURCE_DIR}/${src}")
+        list(APPEND in_files "${src}")
+        get_filename_component(src "${src}" NAME)
         string(REPLACE ".vala" ".c" src ${src})
         string(REPLACE ".gs" ".c" src ${src})
-        set(out_file "${DIRECTORY}/${src}")
         list(APPEND out_files "${DIRECTORY}/${src}")
     endforeach(src ${ARGS_SOURCES} ${ARGS_UNPARSED_ARGUMENTS})
 
@@ -175,6 +175,8 @@ function(vala_precompile output)
     DEPENDS 
         ${in_files} 
         ${ARGS_CUSTOM_VAPIS}
+    WORKING_DIRECTORY
+        ${CMAKE_CURRENT_SOURCE_DIR}
     )
     set(${output} ${out_files} PARENT_SCOPE)
 endfunction(vala_precompile)
