@@ -67,3 +67,4 @@ find_package_handle_standard_args(Vala
 
 set(VALA_USE_FILE "${CMAKE_CURRENT_LIST_DIR}/UseVala.cmake")
 
+include(${VALA_USE_FILE})
